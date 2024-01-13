@@ -1,0 +1,130 @@
+[project]
+name = "bulpedia-scraper"
+version = "0.1.0"
+description = "Bulpedia pokemon scraper"
+authors = [
+    {name = "Firelight Flagboy", email = "30697622+FirelightFlagboy@users.noreply.github.com"},
+]
+dependencies = [
+    "requests==2.31.0",
+    "lxml==5.1.0",
+    "cssselect==1.2.0",
+    "pydantic==2.5.3",
+    "requests-ratelimiter==0.4.2",
+]
+requires-python = "==3.11.*"
+readme = "README.md"
+license = {text = "AGPL-3.0-or-later"}
+
+
+[tool.pdm]
+package-type = "application"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "mypy==1.8.0",
+    "ruff==0.1.13",
+    "lxml-stubs==0.5.1",
+    "types-requests==2.31.0.20240106",
+]
+
+[tool.ruff]
+# https://docs.astral.sh/ruff/settings/#line-length
+line-length = 100
+target-version = "py39"
+extend-exclude = [".sl"]
+
+[tool.ruff.lint.pycodestyle]
+# https://docs.astral.sh/ruff/settings/#pycodestyle-max-line-length
+max-line-length = 128
+
+[tool.ruff.lint]
+extend-select = [
+    "F",
+    "DJ",
+    "E",
+    "W",
+    "I",
+    "UP",
+    "B",
+    "DTZ",
+    "SIM",
+    "UP031",
+    "RUF",
+]
+ignore = [
+    # Check for use of ternary operator, we don't want to force that style
+    "SIM108",
+    # mutable-class-default
+    "RUF012",
+]
+
+[tool.ruff.isort]
+known-first-party = []
+
+[tool.mypy]
+plugins = []
+mypy_path = "$MYPY_CONFIG_FILE_DIR/src"
+
+# ################
+# Import Discovery
+# ################
+
+namespace_packages = true
+explicit_package_bases = true
+ignore_missing_imports = false
+
+
+# ######################
+# Platform configuration
+# ######################
+
+python_version = "3.11"
+platform = "linux"
+
+# #######################
+# Disallow dynamic typing
+# #######################
+
+disallow_any_unimported = true
+disallow_any_decorated = true
+disallow_any_generics = true
+disallow_subclassing_any = true
+
+# #############################
+# Untyped definitions and calls
+# #############################
+
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+# ##########################
+# None and Optional handling
+# ##########################
+
+no_implicit_optional = true
+strict_optional = true
+
+# ####################
+# Configuring warnings
+# ####################
+
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+# ##################
+# Suppressing errors
+# ##################
+
+ignore_errors = false
+
+# ##############################
+# Miscellaneous strictness flags
+# ##############################
+
+allow_redefinition = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = []
